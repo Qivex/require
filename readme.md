@@ -1,7 +1,7 @@
 # require
 
 An improvised re-implementation of require - because of the **preposterous** decision to not include it in ComputerCraft by default.
-By executing this program you will get a global `require` function, replicating the default behaviour of the Lua language.
+Executing this program will give you a global `require` function, replicating the default Lua behaviour.
 Additionally, it can also load APIs written for os.loadAPI() by checking the "global" environment of the API.
 
 
@@ -17,14 +17,14 @@ Additionally, it can also load APIs written for os.loadAPI() by checking the "gl
 
 *This is just a quick overview. For more details see the [Lua Reference Manual][1] or [Programming in Lua][2] Guide*
 
-The require function takes in the module path as string (where dots represent slashes), and returns the loaded module:
+The `require` function takes in the module path as string (where dots represent slashes), and returns the loaded module:
 
 	local mymod = require("path.to.mymodule")
 
-If no matching file is found or it contains/causes errors, then `require` will raise an error itself and won't try to load this same module again.
+If no matching file is found, or it contains/causes errors, then `require` will raise an error itself and won't try to load this same module again.
 Otherwise, the module will be loaded and returned, and its value gets cached in `package.loaded[name]` until restart.
 
-When searching a file, the following locations are checked:
+When searching a file, the following locations are checked (`?` denotes the resolved module path):
 
 	?
 	?/init
@@ -33,11 +33,9 @@ When searching a file, the following locations are checked:
 	/rom/apis/?
 	/rom/apis/?/init
 
-where ? denotes the resolved module path.
-
 An `init` file can be used to load multiple modules at once:
 
-	-- In file myapi:
+	-- In file "myapi/init":
 	return {
 		submodule = require "myapi.submodule",
 		somefile = require "myapi.somefile"
