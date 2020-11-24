@@ -47,21 +47,22 @@ local createPathLoader = function(module_name, file)
 			setfenv(chunk, env)
 		end
 		-- Call the chunk to execute its content
-		local api = {}
 		local ok, content = pcall(chunk)
 		if not ok then
 			error("Required file '" .. file .. "' could not be executed.\n\nCaused by:\n" .. content, 3)
 		else
-			-- Add parts defined inside "return" statement
-			if (type(content) ~= "string") then
-				api = content or {}
+			local api = {}
+			if content then
+				-- Add content from "return" statement (default style)
+				api = content
+			else
+				-- Add content from environment (old API style)
+				for key, value in pairs(env) do
+					api[key] = value
+				end
 			end
-			-- Add parts defined for "global" environment
-			for key, value in pairs(env) do
-				api[key] = value
-			end
+			return api
 		end
-		return api
 	end
 	return path_loader
 end
