@@ -33,7 +33,7 @@ When searching a file, the following locations are checked (`?` denotes the reso
 	/rom/apis/?
 	/rom/apis/?/init
 
-An `init` file can be used to load multiple modules at once:
+An `init` file is used to load multiple modules at once:
 
 	-- In file "myapi/init":
 	return {

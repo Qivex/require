@@ -97,8 +97,8 @@ local package = {
 	searchers = {
 		preload_searcher,
 		path_searcher
-		-- TODO dir_searcher: loads entire dir assuming default inits
-		-- TODO github_searcher: download missing files from github
+		-- OPTIONAL dir_searcher: loads entire dir assuming default inits
+		-- OPTIONAL github_searcher: download missing files from github
 	}
 }
 
